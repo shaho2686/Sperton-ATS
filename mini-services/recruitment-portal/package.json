@@ -1,0 +1,24 @@
+{
+  "name": "sperton-recruitment-portal",
+  "version": "1.0.0",
+  "description": "A simplified full-stack recruitment portal built for Sperton's practical assignment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "bun --hot index.js",
+    "seed": "node src/config/seed.js",
+    "init": "node src/config/database.js && node src/config/seed.js"
+  },
+  "author": "Shahrukh",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "groq-sdk": "^0.15.0",
+    "jsonwebtoken": "^9.0.2",
+    "puppeteer-core": "^24.40.0",
+    "sql.js": "^1.11.0",
+    "uuid": "^11.1.0"
+  }
+}

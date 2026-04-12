@@ -1,0 +1,96 @@
+{
+  "startedAt": "2026-04-12T09:34:31.609Z",
+  "portalUrl": "http://localhost:3000/portal/",
+  "checks": [
+    {
+      "name": "Login",
+      "status": "passed",
+      "details": "Portal dashboard loaded"
+    },
+    {
+      "name": "Provision managed admin",
+      "status": "passed",
+      "details": "qa_admin_1775986471612"
+    },
+    {
+      "name": "Unauthorized access",
+      "status": "passed",
+      "details": "Protected endpoints return 401 without auth"
+    },
+    {
+      "name": "Invalid user form",
+      "status": "passed",
+      "details": "Short password validation blocked submission"
+    },
+    {
+      "name": "Profile validation",
+      "status": "passed",
+      "details": "Password mismatch validation blocked submission"
+    },
+    {
+      "name": "Profile update and avatar",
+      "status": "passed",
+      "details": "QA Admin Updated 1775986471612"
+    },
+    {
+      "name": "Delete self blocked",
+      "status": "passed",
+      "details": "Admin cannot delete own account"
+    },
+    {
+      "name": "Admin user CRUD",
+      "status": "passed",
+      "details": "qa_recruiter_edit_1775986471612"
+    },
+    {
+      "name": "Add candidate",
+      "status": "passed",
+      "details": "14a297b9-4414-475e-83bb-1011d531e9fb"
+    },
+    {
+      "name": "Open detail panel",
+      "status": "passed",
+      "details": "QA Candidate 1775986471612"
+    },
+    {
+      "name": "Edit candidate",
+      "status": "passed",
+      "details": "Sperton QA Ops"
+    },
+    {
+      "name": "Search and filters",
+      "status": "passed",
+      "details": "Name search and source filter responded"
+    },
+    {
+      "name": "List/board and status change",
+      "status": "passed",
+      "details": "View toggle and status update worked"
+    },
+    {
+      "name": "Resume download",
+      "status": "passed",
+      "details": "Resume endpoint returned a downloadable file"
+    },
+    {
+      "name": "AI analysis",
+      "status": "passed",
+      "details": "AI analyze endpoint responded successfully"
+    },
+    {
+      "name": "AI outreach",
+      "status": "passed",
+      "details": "AI outreach endpoint responded successfully"
+    },
+    {
+      "name": "Delete candidate",
+      "status": "passed",
+      "details": "QA Candidate 1775986471612"
+    }
+  ],
+  "screenshots": [],
+  "warnings": [
+    "Login endpoint rejected demo credentials. Falling back to signed QA token."
+  ],
+  "finishedAt": "2026-04-12T09:34:53.943Z"
+}
