@@ -1,89 +1,89 @@
-# Sperton Recruitment Portal
+# Sperton Recruitment Portal (Assessment Submission)
 
-This is a recruitment portal for managing job candidates and tracking them through the hiring pipeline. It's built to work locally on your computer without needing any extra setup or cloud services.
+This project is a simplified but functional full-stack recruitment portal built for the Sperton practical assignment.
 
-You can log in, see a list of all candidates, click on each one to see their details, add new candidates, update their status, and even use AI to help score candidates and write outreach messages.
+It includes:
+- Candidate management (list, add, update status)
+- Candidate profile with evaluation parameters
+- Basic authentication
+- Persistent storage
+- Optional AI features (Groq) for analysis and outreach
 
-## What's included
+## Assignment requirements coverage
 
-### Core features
+Implemented items from the assignment:
 
-- **Candidate list** — Search, filter, and browse all candidates
-- **Add candidates** — Quickly add new people to the system
-- **Update status** — Move candidates through the pipeline (Applied, Screening, Interview, Offer, Hired, Rejected)
-- **Candidate details** — View full profile with notes, scores, position, market segment, and resume
-- **Admin login** — Simple username/password protection
-- **Data storage** — Everything saves to a local database (no cloud needed)
+- Backend API with candidate endpoints:
+	- List candidates
+	- Add candidate
+	- Update candidate status
+- Frontend consuming the API:
+	- Candidate list with filtering/search
+	- Candidate profile/detail view
+	- Evaluation parameters (technical, experience, culture-fit/overall scoring)
+- Persistent storage (SQLite)
+- Basic authentication (JWT-based)
+- Mock/seed data support
 
-### Bonus features I added
+## Tech stack
 
-- Multiple admin and recruiter users
-- Resume upload and download
-- AI-powered candidate scoring and feedback
-- AI-generated email outreach templates
-- Dashboard with hiring stats and summaries
-- Avatar profile pictures
-- Automated testing script for the core workflows
+- Frontend: Next.js + React (plus portal UI assets)
+- Backend API: Node.js + Express
+- Database: SQLite
+- Auth: JWT
+- Optional AI: Groq SDK
 
-## What technology I used and why
+## Run in 30 seconds
 
-**Backend: Node.js and Express** — JavaScript on the server side. It's fast, easy to understand, and great for building APIs. Express is a lightweight web framework that handles all the routes (GET, POST, PUT, DELETE).
+Prerequisite: Node.js installed.
 
-**Frontend: Plain HTML, CSS, and JavaScript** — No heavy build tools or frameworks. Just vanilla code that's easy to read and modify. This makes it transparent what the UI is doing and helps reviewers understand the logic quickly.
-
-**Storage: SQLite** — A simple, lightweight database that works locally without needing PostgreSQL or any external service. Everything saves to a file automatically. Perfect for a self-contained project that works on any computer.
-
-**Authentication: JWT tokens** — When you log in, the system gives you a token. Future requests include that token to prove you're logged in. It's stateless (the server doesn't need to remember anything) and simple to implement.
-
-**AI (optional): Groq API** — If you provide an API key, you can use Groq to automatically analyze candidates and generate email drafts. If you don't provide the key, the system works fine without it.
-
-## How to run this locally
-
-**You need:** Node.js installed on your computer
-
-### Step 1: Install
-
-Open a terminal in the project folder and run:
+1. Install dependencies
 
 ```bash
 npm install
 ```
 
-This downloads all the code dependencies.
+2. Create env file (for AI features)
 
-### Step 2: Set up the admin account
+```bash
+copy .env.example .env
+```
+
+Then add your Groq key inside `.env`:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+3. (Optional but recommended) reset admin account
 
 ```bash
 node scripts/reset-portal-admin.js
 ```
 
-This creates your default login:
-- **Username:** `admin`
-- **Password:** `123456`
+Default login:
+- Username: `admin`
+- Password: `123456`
 
-### Step 3: Add sample candidates
+4. (Optional) seed sample candidates
 
 ```bash
 node scripts/seed-sample-candidates.js
 ```
 
-This loads 6 example candidates into the database so you have data to see.
-
-### Step 4: Start the server
+5. Start the app
 
 ```bash
 npm start
 ```
 
-The server will start on `http://localhost:3000`. Open this URL in your browser and go to `/portal`.
+The app runs on:
+- `http://localhost:3000`
+- Main portal path: `http://localhost:3000/portal`
 
-### Step 5: Log in
+## Environment variables
 
-Use the credentials from Step 2 (admin / 123456) and start exploring.
-
-## Optional: Add AI features
-
-If you want the AI candidate scoring and outreach features to work, create a `.env` file in the root with:
+Use `.env.example` as the template and keep real values in `.env`.
 
 ```env
 GROQ_API_KEY=your_groq_api_key_here
@@ -91,33 +91,51 @@ GROQ_MODEL=llama-3.3-70b-versatile
 JWT_SECRET=any_random_text_here
 ```
 
-Without this, the portal works fine—AI features just won't be available.
+Behavior without Groq key:
+- Core portal features continue to work.
+- AI endpoints/features require `GROQ_API_KEY`.
 
-## How this scales to production
+## Production priorities (short answer)
 
-This system is intentionally kept simple for the assessment, but it's built with a clean foundation that can grow.
+If promoted beyond assignment scope, top priorities would be:
 
-**What we have now (works great for small teams):**
-- Simple candidate storage and status tracking
-- Basic login and permissions
-- Fast local setup with no dependencies
+1. Stronger security controls
+- Secret management (vault/secret manager), key rotation, strict CORS, rate limiting, audit logging.
 
-**To scale this to production (for larger teams and more candidates):**
+2. Scalability and reliability
+- Move from SQLite to managed Postgres, add caching, background workers for long AI tasks, and horizontal API scaling.
 
-1. **Database:** Move from local SQLite to PostgreSQL or similar. This lets many users work at the same time without conflicts.
+3. Better access control
+- Role-based and permission-based authorization with least-privilege policies.
 
-2. **Architecture:** Separate the frontend, API, and database onto different servers. This way each can grow independently if needed.
+4. Observability
+- Centralized structured logs, error tracking, metrics, and alerting.
 
-3. **Background jobs:** Move slow tasks (AI analysis, sending emails, generating reports) to run in the background instead of while users wait. Use a job queue like Bull or RabbitMQ.
+## Security and scalability risks (short answer)
 
-4. **Storage:** Move resume files from local disk to cloud storage (S3, Azure Blob, Google Cloud). This scales better and is more reliable.
+Main risks in a portal like this:
 
-5. **Caching:** Add Redis to cache frequently accessed data so the database isn't slammed.
+- Credential/key leakage from poor secret handling
+- Overly broad auth permissions
+- API abuse without throttling/rate limiting
+- Single-node bottlenecks (database and API)
+- Large file upload handling and storage growth
 
-6. **Permissions:** Today it's simple admin/recruiter roles. Production needs fine-grained permissions (who can see what, who can do what).
+## ATS integration approach (short answer)
 
-7. **Integrations:** An ATS needs to sync with other systems like email, calendars, and job boards. The current structure already separates integrations nicely so they can be added cleanly.
+Recommended architecture for external ATS integration:
 
-8. **Monitoring & logs:** Add tools to track errors, performance, and user actions. This helps catch problems early.
+1. Integration layer
+- Add a dedicated adapter/service module per ATS provider.
 
-**The good news:** The code is already structured to support all this. The API layer is separate from the UI. The database layer is separate from the business logic. Adding these production features doesn't mean starting over—it means upgrading each piece when needed.
+2. Unified internal model
+- Map ATS-specific fields into one canonical internal candidate schema.
+
+3. Sync strategy
+- Use webhook-first updates when available; fall back to scheduled polling.
+
+4. Resilience
+- Idempotent sync jobs, retries with backoff, dead-letter queue for failed syncs.
+
+5. Security
+- Store provider credentials in secure secret storage and sign/verify webhook payloads.
