@@ -1,8 +1,42 @@
 # Sperton Recruitment Portal
 
-Full-stack recruitment portal built for assessment review.
+Simplified full-stack recruitment portal built for assessment review.
 
-## Quick Start
+## What this project includes
+
+- Candidate management: list, add, edit, update status
+- Candidate profile view with evaluation scoring
+- Basic authentication (admin/recruiter)
+- Persistent local database (SQLite via sql.js)
+- Dashboard and hiring pipeline stats
+- Resume upload/download support
+
+## Assignment coverage
+
+This implementation covers the requested scope:
+
+- Backend endpoints for:
+	- list candidates
+	- add candidate
+	- update candidate status
+- Frontend consuming backend APIs with:
+	- searchable/filterable candidate list
+	- candidate detail/profile screen
+	- at least 3 evaluation parameters (technical, experience, culture fit)
+- Persistent data storage
+- Basic access control
+- Local runnable setup with clear README instructions
+
+## Tech stack
+
+- Frontend: Next.js + React
+- Backend: Node.js + Express
+- Database: SQLite (sql.js)
+- Auth: JWT + API key fallback support
+
+## Run locally
+
+Prerequisite: Node.js installed.
 
 1. Install dependencies
 
@@ -10,19 +44,13 @@ Full-stack recruitment portal built for assessment review.
 npm install
 ```
 
-2. Seed sample candidates
-
-```bash
-node scripts/seed-sample-candidates.js
-```
-
-3. Start the project
+2. Start application
 
 ```bash
 npm start
 ```
 
-4. Open in browser
+3. Open portal
 
 ```text
 http://localhost:3000/portal
@@ -33,17 +61,17 @@ http://localhost:3000/portal
 - Username: admin
 - Password: 123456
 
-## Core Features
+## Main API routes (used by frontend)
 
-- Candidate list with search and filters
-- Candidate profile view
-- Add candidate
-- Update candidate status
-- Recruiter/admin workflow
-- Dashboard and reporting
+- POST /api/auth/login
+- GET /api/candidates
+- POST /api/candidates
+- PUT /api/candidates/:id
+- GET /api/candidates/:id
+- GET /api/stats
 
-## Tech Stack
+## Notes
 
-- Next.js
-- Node.js + Express
-- SQLite
+- The database file is stored at mini-services/recruitment-portal/data/recruitment.db.
+- The start command builds and runs the app through npm start.
+
