@@ -1,6 +1,6 @@
 # Sperton Recruitment Portal
 
-Simplified full-stack recruitment portal built for assessment review.
+Simplified full-stack recruitment portal.
 
 ## What this project includes
 
