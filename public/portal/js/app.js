@@ -643,6 +643,7 @@ function toggleRejectionOther() {
 
 function submitRejectionReason() {
   if (!pendingStatusChange) return;
+  const change = pendingStatusChange;
   const selector = document.getElementById('rejection-reason-select');
   let reason = selector.value;
   if (reason === 'Other') {
@@ -654,7 +655,7 @@ function submitRejectionReason() {
     reason = other;
   }
   closeRejectionReasonModal();
-  updateStatus(pendingStatusChange.id, 'rejected', reason);
+  updateStatus(change.id, 'rejected', reason);
   pendingStatusChange = null;
 }
 
